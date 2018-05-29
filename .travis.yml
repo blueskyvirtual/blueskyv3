@@ -14,7 +14,6 @@ addons:
 bundler_args: --jobs 3 --retry 3
 
 before_script:
-  - psql -U postgres -c "create extension postgis"
   - psql -c "CREATE DATABASE blueskyv3_test;" -U postgres
   - cp config/database.yml.travis config/database.yml
   - bundle exec rake db:schema:load db:seed

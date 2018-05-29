@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Airport < ApplicationRecord
   # Active Record associations
   belongs_to :region
@@ -34,11 +36,11 @@ class Airport < ApplicationRecord
 
   private
 
-  # Formats the attributes for display
-  def format_attributes
-    self.icao = icao.upcase   unless icao.blank? # ensure ICAO is capitalized
-    self.iata = iata.upcase   unless iata.blank? # ensure ICAO is capitalized
-    self.name = name.titleize unless name.blank? # ensure name is cased
-    self.city = city.titleize unless city.blank? # ensure name is cased
-  end
+    # Formats the attributes for display
+    def format_attributes
+      self.icao = icao.upcase   unless icao.blank? # ensure ICAO is capitalized
+      self.iata = iata.upcase   unless iata.blank? # ensure ICAO is capitalized
+      self.name = name.titleize unless name.blank? # ensure name is cased
+      self.city = city.titleize unless city.blank? # ensure name is cased
+    end
 end
