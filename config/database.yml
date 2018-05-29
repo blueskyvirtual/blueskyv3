@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: blueskyv3_production
-  username: blueskyv3
-  password: <%= ENV['BLUESKYV3_DATABASE_PASSWORD'] %>
+  url: <%= ENV['BLUESKYV3_DATABASE_URL'] %>
