@@ -45,6 +45,7 @@ group :development, :test do
   gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "shoulda-callback-matchers", "~> 1.1.1"
   gem "shoulda-matchers", "~> 3.1"
+  gem "simplecov", require: false
 end
 
 group :development do
