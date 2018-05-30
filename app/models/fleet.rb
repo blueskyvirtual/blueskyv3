@@ -3,6 +3,7 @@
 class Fleet < ApplicationRecord
   # Active Record associations
   belongs_to :airline
+  has_many   :aircraft, dependent: :destroy
 
   # Active Record callbacks
   after_validation :format_attributes
@@ -22,12 +23,12 @@ class Fleet < ApplicationRecord
 
   validates :equip, presence: true, allow_blank: false
 
-  validates :pax,  numericality: { greater_than_or_equal_to:  0 }, presence: true
-  validates :oew,  numericality: { greater_than:  0 }, presence: true
-  validates :mzfw, numericality: { greater_than:  0 }, presence: true
-  validates :mtow, numericality: { greater_than:  0 }, presence: true
-  validates :mlw,  numericality: { greater_than:  0 }, presence: true
-  validates :mfc,  numericality: { greater_than:  0 }, presence: true
+  validates :pax,  numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validates :oew,  numericality: { greater_than: 0 }, presence: true
+  validates :mzfw, numericality: { greater_than: 0 }, presence: true
+  validates :mtow, numericality: { greater_than: 0 }, presence: true
+  validates :mlw,  numericality: { greater_than: 0 }, presence: true
+  validates :mfc,  numericality: { greater_than: 0 }, presence: true
 
   validates :ff,
             numericality: {

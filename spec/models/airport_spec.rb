@@ -11,6 +11,7 @@ RSpec.describe Airport, type: :model do
 
   describe "ActiveRecord associations" do
     it { expect(airport).to belong_to(:region) }
+    it { expect(airport).to have_many(:aircraft) }
   end
   # describe 'ActiveRecord associations'
 

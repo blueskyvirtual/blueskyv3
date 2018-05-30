@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_173550) do
+ActiveRecord::Schema.define(version: 2018_05_30_231408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "aircraft", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "fleet_id", null: false
+    t.string "registration", null: false
+    t.uuid "airport_id"
+    t.boolean "active", default: true
+    t.index ["registration"], name: "index_aircraft_on_registration"
+  end
 
   create_table "airlines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "icao", null: false
@@ -83,6 +91,8 @@ ActiveRecord::Schema.define(version: 2018_05_30_173550) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "aircraft", "airports"
+  add_foreign_key "aircraft", "fleets"
   add_foreign_key "airports", "regions"
   add_foreign_key "fleets", "airlines"
   add_foreign_key "regions", "countries"

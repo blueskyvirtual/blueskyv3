@@ -3,6 +3,7 @@
 class Airport < ApplicationRecord
   # Active Record associations
   belongs_to :region
+  has_many   :aircraft, dependent: :nullify
 
   # Active Record validations
   validates :icao,
