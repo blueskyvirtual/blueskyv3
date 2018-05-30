@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe Airline, type: :model do
   it "has a valid factory" do
@@ -6,6 +8,11 @@ RSpec.describe Airline, type: :model do
   end
 
   let(:airline) { build(:airline) }
+
+  describe "ActiveRecord associations" do
+    it { expect(airline).to have_many(:fleets) }
+  end
+  # describe 'ActiveRecord associations'
 
   describe "ActiveModel validations" do
     # Basic validations
@@ -26,7 +33,7 @@ RSpec.describe Airline, type: :model do
 
   describe "#format_attributes" do
     before :each do
-      @airline = build(:airline, icao: 'tst', iata: 'ts', name: "test")
+      @airline = build(:airline, icao: "tst", iata: "ts", name: "test")
       @airline.valid?
     end
 
@@ -45,7 +52,7 @@ RSpec.describe Airline, type: :model do
 
   describe "#to_s" do
     before :each do
-      @airline = build(:airline, icao: 'TST', name: "Test")
+      @airline = build(:airline, icao: "TST", name: "Test")
     end
 
     it "should return: name (icao)" do

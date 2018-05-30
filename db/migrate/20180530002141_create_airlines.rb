@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAirlines < ActiveRecord::Migration[5.2]
   def change
     create_table :airlines, id: :uuid do |t|

@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class Airline < ApplicationRecord
+  # Active Record associations
+  has_many :fleets, dependent: :destroy
 
   # Active Record validations
   validates :icao,
@@ -28,11 +32,11 @@ class Airline < ApplicationRecord
 
   private
 
-  # Format attributes for display
-  #
-  def format_attributes
-    self.icao = icao.upcase    unless icao.blank?
-    self.iata = iata.upcase    unless iata.blank?
-    self.name = name.titlecase unless name.blank?
-  end
+    # Format attributes for display
+    #
+    def format_attributes
+      self.icao = icao.upcase    unless icao.blank?
+      self.iata = iata.upcase    unless iata.blank?
+      self.name = name.titlecase unless name.blank?
+    end
 end
