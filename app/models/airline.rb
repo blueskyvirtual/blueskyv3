@@ -2,7 +2,8 @@
 
 class Airline < ApplicationRecord
   # Active Record associations
-  has_many :fleets, dependent: :destroy
+  has_many :fleets,  dependent: :destroy
+  has_many :flights, dependent: :destroy
 
   # Active Record validations
   validates :icao,

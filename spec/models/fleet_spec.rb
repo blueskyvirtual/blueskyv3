@@ -12,6 +12,7 @@ RSpec.describe Fleet, type: :model do
   describe "ActiveRecord associations" do
     it { expect(fleet).to belong_to(:airline) }
     it { expect(fleet).to have_many(:aircraft) }
+    it { expect(fleet).to have_many(:flights) }
   end
   # describe 'ActiveRecord associations'
 

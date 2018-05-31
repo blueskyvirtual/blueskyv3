@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_231408) do
+ActiveRecord::Schema.define(version: 2018_05_31_131100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -67,6 +67,19 @@ ActiveRecord::Schema.define(version: 2018_05_30_231408) do
     t.index ["icao"], name: "index_fleets_on_icao"
   end
 
+  create_table "flights", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "airline_id", null: false
+    t.integer "number", null: false
+    t.uuid "origin_id", null: false
+    t.uuid "destination_id", null: false
+    t.time "depart_time", null: false
+    t.time "arrive_time", null: false
+    t.string "days", default: "1234567", null: false
+    t.uuid "fleet_id", null: false
+    t.decimal "distance", precision: 6, scale: 1, null: false
+    t.index ["number"], name: "index_flights_on_number"
+  end
+
   create_table "ranks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.decimal "hours", precision: 6, scale: 1, default: "0.0"
@@ -95,5 +108,9 @@ ActiveRecord::Schema.define(version: 2018_05_30_231408) do
   add_foreign_key "aircraft", "fleets"
   add_foreign_key "airports", "regions"
   add_foreign_key "fleets", "airlines"
+  add_foreign_key "flights", "airlines"
+  add_foreign_key "flights", "airports", column: "destination_id"
+  add_foreign_key "flights", "airports", column: "origin_id"
+  add_foreign_key "flights", "fleets"
   add_foreign_key "regions", "countries"
 end

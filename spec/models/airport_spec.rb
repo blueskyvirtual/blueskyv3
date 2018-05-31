@@ -12,6 +12,8 @@ RSpec.describe Airport, type: :model do
   describe "ActiveRecord associations" do
     it { expect(airport).to belong_to(:region) }
     it { expect(airport).to have_many(:aircraft) }
+    it { expect(airport).to have_many(:scheduled_arrivals) }
+    it { expect(airport).to have_many(:scheduled_departures) }
   end
   # describe 'ActiveRecord associations'
 
@@ -60,7 +62,7 @@ RSpec.describe Airport, type: :model do
     end
 
     it "should return: airport name (code)" do
-      expect(@airport.to_s).to eq "#{@airport.name} (#{@airport.icao})"
+      expect(@airport.to_s).to eq "#{@airport.city}, #{@airport.region.code} (#{@airport.icao})"
     end
   end
 end

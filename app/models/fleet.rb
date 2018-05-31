@@ -4,6 +4,7 @@ class Fleet < ApplicationRecord
   # Active Record associations
   belongs_to :airline
   has_many   :aircraft, dependent: :destroy
+  has_many   :flights,  dependent: :destroy
 
   # Active Record callbacks
   after_validation :format_attributes

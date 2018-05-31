@@ -1,15 +1,28 @@
 # frozen_string_literal: true
 
 class Airport < ApplicationRecord
+  # Geocoded
+  reverse_geocoded_by :latitude, :longitude
+
   # Active Record associations
   belongs_to :region
-  has_many   :aircraft, dependent: :nullify
+  has_many   :aircraft,   dependent: :nullify
+
+  has_many   :scheduled_arrivals,
+             dependent:   :destroy,
+             class_name:  "Flight",
+             foreign_key: :destination_id
+
+  has_many   :scheduled_departures,
+             dependent:   :destroy,
+             class_name:  "Flight",
+             foreign_key: :origin_id
 
   # Active Record validations
   validates :icao,
             length:      { is: 4 },
-            allow_blank: false,
-            uniqueness:  { case_sensitive: false }
+            uniqueness:  { case_sensitive: false },
+            allow_blank: false
 
   validates :iata,      length: { is: 3 }, allow_blank: true
   validates :name,      presence: true, allow_blank: false
@@ -32,7 +45,7 @@ class Airport < ApplicationRecord
   # Returns airport name (ICAO)
   #
   def to_s
-    "#{name} (#{icao})"
+    "#{city}, #{region.code} (#{icao})"
   end
 
   private
